@@ -1,18 +1,21 @@
 function createHtml (settings) {
 	var viewportStyle = ' style="height:' + (settings.viewportHeight || 200) + 'px"';
 	var itemStyle = settings.itemHeight ? ' style="height:' + settings.itemHeight + 'px"' : '';
-	var bufferSize = settings.bufferSize ? ' buffer-size="' + settings.bufferSize + '"' : '';
+  var bufferSize = settings.bufferSize ? ' buffer-size="' + settings.bufferSize + '"' : '';
+	var padding = settings.padding ? ' padding="' + settings.padding + '"' : '';
 	var isLoading = settings.isLoading ? ' is-loading="' + settings.isLoading + '"' : '';
 	var topVisible = settings.topVisible ? ' top-visible="' + settings.topVisible + '"' : '';
 	var disabled = settings.disabled ? ' disabled="' + settings.disabled + '"' : '';
 	var adapter = settings.adapter ? ' adapter="' + settings.adapter + '"' : '';
 	var template = settings.template ? settings.template : '{{$index}}: {{item}}';
 	return '<div ui-scroll-viewport' + viewportStyle + '>' +
+		(settings.wrapper ? settings.wrapper.start : '') +
 		'<div ui-scroll="item in ' + settings.datasource + '"' +
 		adapter +
-		itemStyle + bufferSize + isLoading + topVisible + disabled + '>' +
+		itemStyle + bufferSize + padding + isLoading + topVisible + disabled + '>' +
 		template +
 		'</div>' +
+		(settings.wrapper ? settings.wrapper.end : '') +
 		'</div>';
 }
 
